@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Repo } from './interface';
 import Dropdown from './components/RepoDropdown';
+import { GITHUB_CALLBACK_API_ROUTE } from '../../util/constants/apiRoutes';
 
 export default function Dashboard() {
   const [token, setToken] = useState<string | null>(null);
@@ -28,7 +29,7 @@ export default function Dashboard() {
     if(localStorage.getItem('token') && localStorage.getItem('repos')) return 
     if (code && !token) {
       axios
-        .post('http://localhost:5000/callback', { code })
+        .post(GITHUB_CALLBACK_API_ROUTE, { code })
         .then((res) => {
           const { token, repos } = res.data;
           setToken(token);

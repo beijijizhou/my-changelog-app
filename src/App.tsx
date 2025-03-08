@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home/Home';
 import Dashboard from './pages/Dashboard/Dashboard';
+import { configureAxiosInterceptors } from './util/interceptor';
 function App() {
+  configureAxiosInterceptors();
   return (
     <Router>
       <Routes>

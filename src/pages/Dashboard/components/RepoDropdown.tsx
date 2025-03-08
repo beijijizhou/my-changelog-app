@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { DropdownProps, Repo } from '../interface';
+import { DropdownProps } from '../interface';
+import useRepoStore from '../repoStore';
+import Summary from './Summary';
 
 const Dropdown = ({ repos }: DropdownProps) => {
-  const [selectedRepo, setSelectedRepo] = useState<Repo | null>(null);
-    
+  const { selectedRepo, setSelectedRepo } = useRepoStore();
+
   const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value, 10); // Convert selectedId to integer
     const repo = repos.find((repo) => repo.id === selectedId);
-    setSelectedRepo(repo || null); // Update the selected repo
+   
+    setSelectedRepo(repo!); // Update the selected repo
   };
   return (
     <div className="relative inline-block w-64">
-      <label htmlFor="repo-select" className="block text-gray-700 mb-2">
-        Selected Repository: 
-      </label>
+  
       <select
         id="repo-select"
         onChange={handleSelectRepo}
@@ -33,7 +33,7 @@ const Dropdown = ({ repos }: DropdownProps) => {
           </option>
         ))}
       </select>
-
+      {selectedRepo && <Summary></Summary>}
 
     </div>
   );

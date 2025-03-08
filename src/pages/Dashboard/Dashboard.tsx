@@ -3,6 +3,7 @@ import axios from 'axios';
 import { Repo } from './interface';
 import Dropdown from './components/RepoDropdown';
 import { GITHUB_CALLBACK_API_ROUTE } from '../../util/constants/apiRoutes';
+import { LocalStorageNames } from '../../util/constants/localstorage';
 
 export default function Dashboard() {
   const [token, setToken] = useState<string | null>(null);
@@ -10,8 +11,8 @@ export default function Dashboard() {
 
   // Fetch token and repos from localStorage if they exist
   useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    const storedRepos = localStorage.getItem('repos');
+    const storedToken = localStorage.getItem(LocalStorageNames.TOKEN);
+    const storedRepos = localStorage.getItem(LocalStorageNames.REPOS);
 
     if (storedToken) {
       setToken(storedToken);
@@ -26,7 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    if(localStorage.getItem('token') && localStorage.getItem('repos')) return 
+    if(localStorage.getItem(LocalStorageNames.TOKEN) && localStorage.getItem(LocalStorageNames.REPOS)) return 
     if (code && !token) {
       axios
         .post(GITHUB_CALLBACK_API_ROUTE, { code })

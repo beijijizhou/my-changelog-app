@@ -1,18 +1,12 @@
-// src/api.ts
-import axios from 'axios';
+import axios from "axios";
+import { BACKEND_ROUTE } from "../../util/constants/apiRoutes";
 
-export interface CallbackResponse {
-  token: string;
-  repos: Repository[];
-}
-
-export interface Repository {
-  id: number;
-  name: string;
-  html_url: string;
-}
-
-export const fetchTokenAndRepos = async (code: string): Promise<CallbackResponse> => {
-  const response = await axios.post<CallbackResponse>('http://localhost:5000/callback', { code });
-  return response.data;
+export const fetchCommits = async (owner:string, repoName:string) => {
+  try {
+    const response = await axios.get(`${BACKEND_ROUTE}/commits/${owner}/${repoName}`);
+    return response.data; // Handle the response data
+  } catch (error) {
+    console.error('Error fetching commits:', error);
+  }
 };
+

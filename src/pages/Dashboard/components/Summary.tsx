@@ -4,7 +4,7 @@ import { fetchCommits } from '../api';
 
 export default function Summary() {
   const { selectedRepo } = useRepoStore.getState(); // Get selectedRepo from Zustand store
-  const [commitMessages, setCommitMessages] = useState<string[]>([]); // Store commit messages
+  const [commitMessages] = useState<string[]>([]); // Store commit messages
   const [commitSummary, setCommitSummary] = useState<string>(''); // Store AI-generated commit summary
   const [isSummaryEditable, setIsSummaryEditable] = useState<boolean>(false); // Flag to toggle edit mode
   console.log("summary ")

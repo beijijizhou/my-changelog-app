@@ -6,7 +6,6 @@ import axios from 'axios';
 export default function Dashboard() {
   const [token, setToken] = useState<string | null>(null);
   const [repos, setRepos] = useState<Repository[]>([]);  
-  console.log("dashboard")
     useEffect(() => {
         const urlParams = new URLSearchParams(window.location.search);
         const code = urlParams.get('code');

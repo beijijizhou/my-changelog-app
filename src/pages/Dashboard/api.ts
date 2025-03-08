@@ -10,7 +10,6 @@ export interface Repository {
   id: number;
   name: string;
   html_url: string;
-  [key: string]: unknown; // For additional fields if needed
 }
 
 export const fetchTokenAndRepos = async (code: string): Promise<CallbackResponse> => {

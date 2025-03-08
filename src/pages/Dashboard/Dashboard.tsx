@@ -1,45 +1,55 @@
-// src/pages/Dashboard.tsx
 import { useEffect, useState } from 'react';
-import { Repository } from '../Home/api';
 import axios from 'axios';
+import { Repo } from './interface';
+import Dropdown from './components/RepoDropdown';
 
 export default function Dashboard() {
   const [token, setToken] = useState<string | null>(null);
-  const [repos, setRepos] = useState<Repository[]>([]);  
-    useEffect(() => {
-        const urlParams = new URLSearchParams(window.location.search);
-        const code = urlParams.get('code');
-      
-        if (code && !token) {
-            axios
-                .post('http://localhost:5000/callback', { code })
-                .then((res) => {
-                    setToken(res.data.token);
-                    setRepos(res.data.repos);
-                    localStorage.setItem('repos', JSON.stringify(res.data.repos));
-                    // navigate(DASHBOARD_PAGE_ROUTES);
-                })
-                .catch((err) => {
-                    console.error('Error while fetching data from backend:', err.response || err.message);
-                });
-        }
-    }, [token]);
+  const [repos, setRepos] = useState<Repo[]>([]);
+
+  // Fetch token and repos from localStorage if they exist
+  useEffect(() => {
+    const storedToken = localStorage.getItem('token');
+    const storedRepos = localStorage.getItem('repos');
+
+    if (storedToken) {
+      setToken(storedToken);
+    }
+
+    if (storedRepos) {
+      setRepos(JSON.parse(storedRepos));
+    }
+  }, []);
+
+  // Fetch data from backend if the code exists
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if(localStorage.getItem('token') && localStorage.getItem('repos')) return 
+    if (code && !token) {
+      axios
+        .post('http://localhost:5000/callback', { code })
+        .then((res) => {
+          const { token, repos } = res.data;
+          setToken(token);
+          setRepos(repos);
+
+          // Store the token and repos in localStorage for persistence
+          localStorage.setItem('token', token);
+          localStorage.setItem('repos', JSON.stringify(repos));
+        })
+        .catch((err) => {
+          console.error('Error while fetching data from backend:', err.response || err.message);
+        });
+    }
+  }, [token, repos]);
 
   return (
     <div>
       <h1>Dashboard</h1>
       {repos.length > 0 ? (
         <div>
-          <h2>Your Repositories:</h2>
-          <ul>
-            {repos.map((repo) => (
-              <li key={repo.id}>
-                <a href={repo.html_url} target="_blank" rel="noopener noreferrer">
-                  {repo.name}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <Dropdown repos={repos} />
         </div>
       ) : (
         <p>No repositories found.</p>

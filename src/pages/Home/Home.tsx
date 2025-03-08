@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { DASHBOARD_PAGE_ROUTES, LOCAL_ROUTES } from "../../util/constants/pageRoutes";
+import { DASHBOARD_PAGE_ROUTES } from "../../util/constants/pageRoutes";
 
 export default function Home() {
   const handleLogin = () => {

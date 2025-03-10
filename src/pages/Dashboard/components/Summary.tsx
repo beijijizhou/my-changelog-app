@@ -9,8 +9,7 @@ export default function Summary() {
     selectedRepo!.owner.login,
     selectedRepo!.name
   );
-
-  // Handle the "Regenerate Summary" button click
+  console.log(commitData)
   const handleRegenerateClick = async () => {
   };
 

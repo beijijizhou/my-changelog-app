@@ -1,6 +1,6 @@
 import useRepoStore from '../repoStore';
 import { useCommits } from '../api'; // Import the useCommits hook
-import Editor from './Editor';
+// import Editor from './Editor';
 
 export default function Summary() {
   const { selectedRepo, } = useRepoStore(); // Get selectedRepo from Zustand store

@@ -1,5 +1,4 @@
 import ReactQuill from 'react-quill-new';
-import 'react-quill/dist/quill.snow.css'; // import the Quill styles
 import { useEffect, useState } from 'react';
 
 const Editor = ({ initialContent }: { initialContent: string }) => {

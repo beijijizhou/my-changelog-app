@@ -1,5 +1,6 @@
 import ReactQuill from 'react-quill-new';
 import { useEffect, useState } from 'react';
+import 'react-quill-new/dist/quill.snow.css';
 
 const Editor = ({ initialContent }: { initialContent: string }) => {
   const [editorValue, setEditorValue] = useState<string>(initialContent);

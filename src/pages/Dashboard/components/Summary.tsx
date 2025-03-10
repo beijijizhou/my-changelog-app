@@ -1,5 +1,6 @@
 import useRepoStore from '../repoStore';
 import { useCommits } from '../api'; // Import the useCommits hook
+import Editor from './Editor';
 // import Editor from './Editor';
 
 export default function Summary() {
@@ -9,7 +10,7 @@ export default function Summary() {
     selectedRepo!.owner.login,
     selectedRepo!.name
   );
-  console.log(commitData)
+  
   const handleRegenerateClick = async () => {
   };
 
@@ -35,7 +36,7 @@ export default function Summary() {
 
       <div>
 
-      {/* {commitData && <Editor initialContent={commitData.commitSummary} />} */}
+      {commitData && <Editor initialContent={commitData.commitSummary} />}
 
       </div>
 

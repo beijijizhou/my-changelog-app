@@ -48,14 +48,15 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1>Dashboard</h1>
-      {repos.length > 0 ? (
+      <h1 className='bg-red-500'>Dashboard</h1>
+      {repos.length >= 0 ? (
         <div>
           <Dropdown repos={repos} />
         </div>
       ) : (
         <p>No repositories found.</p>
       )}
+      
     </div>
   );
 }

@@ -12,8 +12,7 @@ const Dropdown = ({ repos }: DropdownProps) => {
     setSelectedRepo(repo!); // Update the selected repo
   };
   return (
-    <div className="relative inline-block w-64">
-  
+    <>
       <select
         id="repo-select"
         onChange={handleSelectRepo}
@@ -33,9 +32,9 @@ const Dropdown = ({ repos }: DropdownProps) => {
           </option>
         ))}
       </select>
-      {selectedRepo && <Summary></Summary>}
+      { <Summary></Summary>}
 
-    </div>
+    </>
   );
 };
 

@@ -4,10 +4,9 @@ import { fetchCommits } from '../api';
 
 export default function Summary() {
   const { selectedRepo } = useRepoStore.getState(); // Get selectedRepo from Zustand store
-  const [commitMessages] = useState<string[]>([]); // Store commit messages
+  const [commitMessages, setCommitMessages] = useState<string[]>([]); // Store commit messages
   const [commitSummary, setCommitSummary] = useState<string>(''); // Store AI-generated commit summary
   const [isSummaryEditable, setIsSummaryEditable] = useState<boolean>(false); // Flag to toggle edit mode
-  console.log("summary ")
   useEffect(() => {
     const fetchData = async () => {
       if (selectedRepo) {
@@ -16,14 +15,17 @@ export default function Summary() {
         const name = selectedRepo.name;
         try {
           // console.log(selectedRepo)
-          const data = await fetchCommits(owner, name); 
-          console.log(data)
+          // const data = await fetchCommits(owner, name);
+          // const { commitMessages, commitSummary } = data
+          // // console.log(commitMessages, commitSummary);
+          // setCommitMessages(commitMessages);
+          // setCommitSummary(commitSummary)
         } catch (error) {
           console.error('Error fetching commit messages:', error);
         }
       }
     };
-  
+
     fetchData(); // Call the async function
   }, [selectedRepo]);
 
@@ -37,29 +39,20 @@ export default function Summary() {
   };
 
   return (
-    <div>
-      <h2>Commit Messages</h2>
-      <div>
-        {commitMessages.map((msg, index) => (
-          <p key={index}>{msg}</p>
-        ))}
+    <div className="grid grid-cols-3 gap-4">
+      {/* Left Column - Commit Messages */}
+      <div className="border p-4">
+        <h2 className="text-lg font-semibold">Commits Message</h2>
       </div>
-
-      <h2>Commit Summary</h2>
-      {isSummaryEditable ? (
-        <textarea
-          value={commitSummary}
-          onChange={(e) => setCommitSummary(e.target.value)}
-          rows={6}
-          cols={60}
-        />
-      ) : (
-        <div>{commitSummary}</div>
-      )}
-
-      <div>
-        <button onClick={handleRegenerateClick}>Regenerate Summary</button>
-        {isSummaryEditable && <button onClick={handleSaveSummary}>Save Summary</button>}
+  
+      {/* Middle Column - Commit Summary */}
+      <div className="border p-4">
+        <h2 className="text-lg font-semibold">Commit Summary</h2>
+      </div>
+  
+      {/* Right Column - Action Buttons */}
+      <div className="border p-4">
+        <h2 className="text-lg font-semibold">Actions</h2>
       </div>
     </div>
   );

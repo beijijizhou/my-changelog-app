@@ -27,7 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    if (localStorage.getItem(LocalStorageNames.TOKEN) && localStorage.getItem(LocalStorageNames.REPOS)) return
+    if(localStorage.getItem(LocalStorageNames.TOKEN) && localStorage.getItem(LocalStorageNames.REPOS)) return 
     if (code && !token) {
       axios
         .post(GITHUB_CALLBACK_API_ROUTE, { code })
@@ -48,7 +48,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <h1 className="text-4xl font-bold text-center text-gray-800">Dashboard</h1>
+<h1 className="text-4xl font-bold text-center text-gray-800">Dashboard</h1>
       {repos.length >= 0 ? (
         <div>
           <Dropdown repos={repos} />
@@ -56,7 +56,7 @@ export default function Dashboard() {
       ) : (
         <p>No repositories found.</p>
       )}
-
+      
     </div>
   );
 }

@@ -32,7 +32,7 @@ const Dropdown = ({ repos }: DropdownProps) => {
           </option>
         ))}
       </select>
-      { <Summary></Summary>}
+      {selectedRepo && <Summary></Summary>}
 
     </>
   );

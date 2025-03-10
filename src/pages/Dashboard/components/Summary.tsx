@@ -35,7 +35,7 @@ export default function Summary() {
 
       <div>
 
-      {commitData && <Editor initialContent={commitData.commitSummary} />}
+      {/* {commitData && <Editor initialContent={commitData.commitSummary} />} */}
 
       </div>
 

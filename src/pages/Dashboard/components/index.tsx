@@ -1,16 +1,17 @@
 import useRepoStore from '../repoStore';
 import { useCommits } from '../api'; // Import the useCommits hook
 import Editor from './Editor';
+import CommitMessages from './CommitMessage/CommitMessages';
 // import Editor from './Editor';
 
-export default function Summary() {
+export default function CommitDashboard() {
   const { selectedRepo, } = useRepoStore(); // Get selectedRepo from Zustand store
 
   const { data: commitData, isLoading, isError } = useCommits(
     selectedRepo!.owner.login,
     selectedRepo!.name
   );
-  
+
   const handleRegenerateClick = async () => {
   };
 
@@ -25,19 +26,9 @@ export default function Summary() {
   return (
     <div className="grid grid-cols-3 gap-5">
       {/* Commit Messages on the Left */}
+      <CommitMessages messagesByDate={commitData?.recentCommits || []} />
       <div>
-        <h2 className="text-xl font-bold mb-4">Commit Messages</h2>
-        <div>
-          {commitData?.commitMessages.map((msg: string, index: number) => (
-            <p key={index} className="mb-2">{msg}</p>
-          ))}
-        </div>
-      </div>
-
-      <div>
-
-      {commitData && <Editor initialContent={commitData.commitSummary} />}
-
+        {commitData && <Editor initialContent={commitData.commitSummary} />}
       </div>
 
       {/* Action Buttons on the Right */}

@@ -1,10 +1,10 @@
 import { DASHBOARD_PAGE_ROUTES } from "../../util/constants/pageRoutes";
-
+const REMOTE_CLIENT_ID = "Ov23liDwZL9ZP50lMr16";
+const clientId = import.meta.env.VITE_API_LOCAL_CLIENT_ID || REMOTE_CLIENT_ID;
+const redirectUri = DASHBOARD_PAGE_ROUTES;
 export default function Home() {
   const handleLogin = () => {
-    const REMOTE_CLIENT_ID = "Ov23liDwZL9ZP50lMr16";
-    const clientId = import.meta.env.VITE_API_LOCAL_CLIENT_ID || REMOTE_CLIENT_ID;
-    const redirectUri = DASHBOARD_PAGE_ROUTES;
+
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=repo`;
   };
 

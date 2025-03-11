@@ -10,7 +10,6 @@ const Editor = ({ initialContent }: { initialContent: string }) => {
   useEffect(() => {
     setEditorValue(initialContent);
   }, [initialContent]);
-  console.log(initialContent)
   return (
     <div>
       <h1>Commit Summary</h1>

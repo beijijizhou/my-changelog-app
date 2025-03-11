@@ -11,10 +11,6 @@ export default function CommitDashboard() {
     selectedRepo!.owner.login,
     selectedRepo!.name
   );
-
-  const handleRegenerateClick = async () => {
-  };
-
   if (isLoading) {
     return <div>Loading commit messages...</div>;
   }
@@ -26,7 +22,7 @@ export default function CommitDashboard() {
   return (
     <div className="grid grid-cols-3 gap-5">
       {/* Commit Messages on the Left */}
-      <CommitMessages messagesByDate={commitData?.recentCommits || []} />
+      <CommitMessages commits={commitData?.commitMessages || []} />
       <div>
         {commitData && <Editor initialContent={commitData.commitSummary} />}
       </div>
@@ -34,12 +30,7 @@ export default function CommitDashboard() {
       {/* Action Buttons on the Right */}
       <div className="flex flex-col items-end">
         <div className="mb-2">
-          <button
-            onClick={handleRegenerateClick}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Regenerate Summary
-          </button>
+
         </div>
       </div>
     </div>

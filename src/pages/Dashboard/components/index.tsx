@@ -24,7 +24,7 @@ export default function CommitDashboard() {
       {/* Commit Messages on the Left */}
       <CommitMessages commits={commitData?.commitMessages || []} />
       <div>
-        {commitData && <Editor initialContent={commitData.commitSummary} />}
+        {commitData && <Editor />}
       </div>
 
       {/* Action Buttons on the Right */}

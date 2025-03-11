@@ -1,3 +1,4 @@
+import useRepoStore from "../../repoStore";
 import { getCommitSummary } from "./api";
 
 interface Commit {
@@ -10,7 +11,7 @@ interface CommitMessagesProps {
 }
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
-  // Sort commits by date (newest first) and group them by date (YYYY-MM-DD)
+  const { setSelectedSummary } = useRepoStore();
   const messagesByDate = commits
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort in descending order
     .reduce<Record<string, Commit[]>>((acc, commit) => {
@@ -24,7 +25,8 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
 
   const handleRegenerateClick = async () => {
     // Functionality for regenerating AI summary
-    getCommitSummary(commits)
+    const data = await getCommitSummary(commits)
+    setSelectedSummary(data.summary)
   };
 
   return (

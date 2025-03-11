@@ -1,20 +1,17 @@
 import ReactQuill from 'react-quill-new';
-import { useEffect, useState } from 'react';
 import './style.css'
-const Editor = ({ initialContent }: { initialContent: string }) => {
-  const [editorValue, setEditorValue] = useState<string>(initialContent);
+import useRepoStore from '../../repoStore';
+const Editor = () => {
+  const { selectedSummary, } = useRepoStore()
   const handleChange = (value: string) => {
-    setEditorValue(value);
+    // setEditorValue(value);
   };
 
-  useEffect(() => {
-    setEditorValue(initialContent);
-  }, [initialContent]);
   return (
     <div>
       <h1>Commit Summary</h1>
       <ReactQuill
-        value={editorValue}
+        value={selectedSummary}
         onChange={handleChange}
         modules={{
           toolbar: [

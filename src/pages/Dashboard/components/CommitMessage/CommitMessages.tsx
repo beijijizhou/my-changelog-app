@@ -1,3 +1,5 @@
+import { getCommitSummary } from "./api";
+
 interface Commit {
   message: string;
   date: string;
@@ -22,7 +24,7 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
 
   const handleRegenerateClick = async () => {
     // Functionality for regenerating AI summary
-    console.log("ai")
+    getCommitSummary(commits)
   };
 
   return (

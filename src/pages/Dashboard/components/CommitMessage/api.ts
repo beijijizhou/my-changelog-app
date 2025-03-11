@@ -2,7 +2,6 @@
 import axios from "axios";
 import { BACKEND_ROUTE } from "../../../../util/constants/apiRoutes";
 import { Commit } from "./interfaces";
-import { useQuery } from "@tanstack/react-query";
 
 export const getCommitSummary = async (commits: Commit[]) => {
     const url = `${BACKEND_ROUTE}/commits/summary`;

@@ -23,11 +23,23 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
       return acc;
     }, {});
 
-  const handleRegenerateClick = async () => {
-    // Functionality for regenerating AI summary
-    const data = await getCommitSummary(commits)
-    setSelectedSummary(data.summary)
-  };
+    const handleRegenerateClick = async () => {
+      try {
+        setSelectedSummary("Loading... Please wait."); // Set loading message
+    
+        // Make the API call to get the summary
+        const data = await getCommitSummary(commits);
+    
+        // Set the summary once data is received
+        setSelectedSummary(data.summary);
+      } catch (error) {
+        console.error("Error while regenerating the summary:", error);
+    
+        // Handle error - you can set a fallback message for the user
+        setSelectedSummary("Failed to regenerate summary. Please try again.");
+      }
+    };
+    
 
   return (
     <div>

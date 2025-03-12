@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-import { Repo } from './interface';
-import { Commit } from './components/CommitMessage/interfaces';
+import { Commit, Repo } from './interface';
 interface RepoStore {
     selectedRepo: Repo | null;
     selectedSummary: string;

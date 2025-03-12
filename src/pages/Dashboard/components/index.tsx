@@ -1,16 +1,14 @@
 import { DropdownProps } from '../interface';
 import useRepoStore from '../repoStore';
-import CommitDashboard from './CommitDashboard';
-
+import RecentSummaries from './RecentSummaries';
 const Dropdown = ({ repos }: DropdownProps) => {
   const { selectedRepo, setSelectedRepo } = useRepoStore();
-
   const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value, 10); // Convert selectedId to integer
     const repo = repos.find((repo) => repo.id === selectedId);
     setSelectedRepo(repo!); // Update the selected repo
   };
-  
+
   return (
     <>
       <select
@@ -32,8 +30,8 @@ const Dropdown = ({ repos }: DropdownProps) => {
           </option>
         ))}
       </select>
-      {selectedRepo && <CommitDashboard></CommitDashboard>}
-
+      {/* {selectedRepo && <CommitDashboard></CommitDashboard>} */}
+      {selectedRepo && <RecentSummaries />}
     </>
   );
 };

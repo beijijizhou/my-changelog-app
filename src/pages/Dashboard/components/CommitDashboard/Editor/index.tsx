@@ -1,11 +1,10 @@
 import ReactQuill from 'react-quill-new';
-import './style.css';
-import useRepoStore from '../../repoStore';
+import useRepoStore from '../../../repoStore';
 import PublishButton from './PublishButton';
 
 const Editor = () => {
   const { selectedSummary, setSelectedSummary } = useRepoStore();
-  const handleEditorChange = (value:string) => {
+  const handleEditorChange = (value: string) => {
     setSelectedSummary(value);
   };
   return (
@@ -16,7 +15,7 @@ const Editor = () => {
       </h1>
       <ReactQuill
         value={selectedSummary}
-        onChange={handleEditorChange} 
+        onChange={handleEditorChange}
         modules={{
           toolbar: [
             [{ header: '1' }, { header: '2' }, { font: [] }],

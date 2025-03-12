@@ -1,5 +1,5 @@
-import useRepoStore from '../repoStore';
-import { useCommits } from '../api'; // Import the useCommits hook
+import useRepoStore from '../../repoStore';
+import { useCommits } from '../../api'; // Import the useCommits hook
 import Editor from './Editor';
 import CommitMessages from './CommitMessage';
 // import Editor from './Editor';

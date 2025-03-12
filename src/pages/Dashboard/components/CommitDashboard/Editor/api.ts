@@ -1,7 +1,7 @@
 
 import axios from "axios";
-import { BACKEND_ROUTE } from "../../../../util/constants/apiRoutes";
-import useRepoStore from "../../repoStore";
+import { BACKEND_ROUTE } from "../../../../../util/constants/apiRoutes";
+import useRepoStore from "../../../repoStore";
 export const saveSummary = async () => {
     const selectedRepo = useRepoStore.getState().selectedRepo!;
     const lastestCommit = useRepoStore.getState().selectedCommits![0];

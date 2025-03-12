@@ -3,6 +3,7 @@ import useRepoStore from "../../repoStore";
 import { getCommitSummary } from "./api";
 import { CommitMessagesProps } from "./interfaces";
 import { groupCommitsByDate } from "./util";
+import AISummaryButton from "./AISummaryButton";
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
   const { setSelectedSummary, selectedRepo, setSelectedCommits } = useRepoStore();
@@ -14,16 +15,6 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
   const toggleExpand = (date: string) => {
     setExpandedDates((prev) => ({ ...prev, [date]: !prev[date] }));
   };
-  const handleRegenerateClick = async () => {
-    try {
-      setSelectedSummary("Loading... Please wait."); // Set loading message
-      const data = await getCommitSummary(selectedRepo!, commits);
-      setSelectedSummary(data.summary);
-    } catch (error) {
-      console.error("Error while regenerating the summary:", error);
-      setSelectedSummary("Failed to regenerate summary. Please try again.");
-    }
-  };
   useEffect(() => {
     if (commits) {
       setSelectedCommits(commits)
@@ -34,12 +25,7 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
     <div>
       <h2 className="text-xl font-bold mb-4">
         Commit Messages
-        <button
-          onClick={handleRegenerateClick}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
-        >
-          AI Summary
-        </button>
+        <AISummaryButton />
       </h2>
       {Object.entries(messagesByDate).map(([date, commits]) => {
         const isExpanded = expandedDates[date];

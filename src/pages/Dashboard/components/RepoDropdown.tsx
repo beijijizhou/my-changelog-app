@@ -8,7 +8,6 @@ const Dropdown = ({ repos }: DropdownProps) => {
   const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value, 10); // Convert selectedId to integer
     const repo = repos.find((repo) => repo.id === selectedId);
-
     setSelectedRepo(repo!); // Update the selected repo
   };
   return (

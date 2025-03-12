@@ -1,7 +1,7 @@
 import useRepoStore from '../repoStore';
 import { useCommits } from '../api'; // Import the useCommits hook
 import Editor from './Editor';
-import CommitMessages from './CommitMessage/CommitMessages';
+import CommitMessages from './CommitMessage';
 // import Editor from './Editor';
 
 export default function CommitDashboard() {
@@ -25,13 +25,6 @@ export default function CommitDashboard() {
       <CommitMessages commits={commitData?.commitMessages || []} />
       <div>
         {commitData && <Editor />}
-      </div>
-
-      {/* Action Buttons on the Right */}
-      <div className="flex flex-col items-end">
-        <div className="mb-2">
-
-        </div>
       </div>
     </div>
   );

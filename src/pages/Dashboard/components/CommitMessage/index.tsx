@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useRepoStore from "../../repoStore";
 import { getCommitSummary } from "./api";
 import { CommitMessagesProps } from "./interfaces";
 import { groupCommitsByDate } from "./util";
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
-  const { setSelectedSummary, selectedRepo } = useRepoStore();
+  const { setSelectedSummary, selectedRepo, setSelectedCommits } = useRepoStore();
   const messagesByDate = groupCommitsByDate(commits);
   const initialLimit = 2;
 
@@ -24,7 +24,11 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
       setSelectedSummary("Failed to regenerate summary. Please try again.");
     }
   };
-
+  useEffect(() => {
+    if (commits) {
+      setSelectedCommits(commits)
+    }
+  }, [commits, setSelectedCommits])
 
   return (
     <div>

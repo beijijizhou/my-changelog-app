@@ -1,0 +1,66 @@
+// PublishButton.jsx (or .tsx if using TypeScript)
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { saveSummary } from './api'; // Adjust path as needed
+
+const PublishButton = () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handlePublishClick = async () => {
+    setIsLoading(true);
+    try {
+      await saveSummary();
+      toast.success('Summary saved successfully!', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+    } catch (error) {
+      toast.error('Failed to save summary.', {
+        position: 'top-right',
+        autoClose: 3000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  return (
+    <button
+      onClick={handlePublishClick}
+      className={`px-4 py-2 rounded ml-4 text-white flex items-center ${
+        isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+      }`}
+      disabled={isLoading}
+    >
+      {isLoading ? (
+        <>
+          <svg
+            className="animate-spin h-5 w-5 mr-2 text-white"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            />
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"
+            />
+          </svg>
+          Saving...
+        </>
+      ) : (
+        'Publish'
+      )}
+    </button>
+  );
+};
+
+export default PublishButton;

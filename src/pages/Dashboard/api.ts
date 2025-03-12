@@ -14,8 +14,8 @@ export const fetchCommits = async (owner: string, repoName: string) => {
 
 export const useCommits = (owner: string, repoName: string) => {
   return useQuery({
-    queryKey: ["commits", owner, repoName], // Query key to uniquely identify the query
-    queryFn: () => fetchCommits(owner, repoName), // The fetch function
-    enabled: !!owner && !!repoName, // Only run the query if the owner and repoName are available
+    queryKey: ["commits", owner, repoName], 
+    queryFn: () => fetchCommits(owner, repoName), 
+    enabled: !!owner && !!repoName, 
   });
 };

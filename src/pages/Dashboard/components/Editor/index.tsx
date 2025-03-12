@@ -7,9 +7,21 @@ const Editor = () => {
     // setEditorValue(value);
   };
 
+  function handlePublishClick(): void {
+    console.log("Publish")
+  }
+
   return (
     <div>
-      <h1>Commit Summary</h1>
+      <h1 className="text-xl font-bold mb-4">Commit Summary
+        <button
+          onClick={handlePublishClick}
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 ml-4"
+        >
+          Publish
+        </button>
+      </h1>
+
       <ReactQuill
         value={selectedSummary}
         onChange={handleChange}

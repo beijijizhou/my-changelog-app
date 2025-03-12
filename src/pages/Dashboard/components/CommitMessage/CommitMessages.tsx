@@ -1,17 +1,18 @@
 import useRepoStore from "../../repoStore";
 import { getCommitSummary } from "./api";
 
-interface Commit {
+export interface Commit {
   message: string;
   date: string;
+  id:string;
 }
 
-interface CommitMessagesProps {
+export interface CommitMessagesProps {
   commits: Commit[]; // Receive raw commit data
 }
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
-  const { setSelectedSummary } = useRepoStore();
+  const { setSelectedSummary, selectedRepo } = useRepoStore();
   const messagesByDate = commits
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort in descending order
     .reduce<Record<string, Commit[]>>((acc, commit) => {
@@ -26,9 +27,9 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
     const handleRegenerateClick = async () => {
       try {
         setSelectedSummary("Loading... Please wait."); // Set loading message
-    
+      
         // Make the API call to get the summary
-        const data = await getCommitSummary(commits);
+        const data = await getCommitSummary(selectedRepo!, commits);
     
         // Set the summary once data is received
         setSelectedSummary(data.summary);

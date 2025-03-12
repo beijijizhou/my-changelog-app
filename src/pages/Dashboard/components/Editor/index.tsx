@@ -3,10 +3,6 @@ import './style.css'
 import useRepoStore from '../../repoStore';
 const Editor = () => {
   const { selectedSummary, } = useRepoStore()
-  const handleChange = (value: string) => {
-    // setEditorValue(value);
-  };
-
   function handlePublishClick(): void {
     console.log("Publish")
   }

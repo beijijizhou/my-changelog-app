@@ -20,7 +20,6 @@ const Editor = () => {
 
       <ReactQuill
         value={selectedSummary}
-        onChange={handleChange}
         modules={{
           toolbar: [
             [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],

@@ -20,3 +20,8 @@ export interface Commit {
 export interface CommitMessagesProps {
   commits: Commit[]; // Receive raw commit data
 }
+
+export interface Summary {
+  commit: Commit;
+  summary: string;
+}

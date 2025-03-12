@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import useRepoStore from "../../repoStore";
-import { getCommitSummary } from "./api";
 import { CommitMessagesProps } from "./interfaces";
 import { groupCommitsByDate } from "./util";
 import AISummaryButton from "./AISummaryButton";
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
-  const { setSelectedSummary, selectedRepo, setSelectedCommits } = useRepoStore();
+  const {  setSelectedCommits } = useRepoStore();
   const messagesByDate = groupCommitsByDate(commits);
   const initialLimit = 2;
 
@@ -50,8 +49,6 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
           </div>
         );
       })}
-
-
     </div>
   );
 }

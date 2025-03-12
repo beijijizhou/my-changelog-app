@@ -1,31 +1,41 @@
+import { DropdownProps } from '../interface';
 import useRepoStore from '../repoStore';
-import { useCommits } from '../api'; // Import the useCommits hook
-import Editor from './Editor';
-import CommitMessages from './CommitMessage';
-// import Editor from './Editor';
+import CommitDashboard from './CommitDashboard';
 
-export default function CommitDashboard() {
-  const { selectedRepo, } = useRepoStore(); // Get selectedRepo from Zustand store
+const Dropdown = ({ repos }: DropdownProps) => {
+  const { selectedRepo, setSelectedRepo } = useRepoStore();
 
-  const { data: commitData, isLoading, isError } = useCommits(
-    selectedRepo!.owner.login,
-    selectedRepo!.name
-  );
-  if (isLoading) {
-    return <div>Loading commit messages...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching commit messages.</div>;
-  }
-
+  const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const selectedId = parseInt(event.target.value, 10); // Convert selectedId to integer
+    const repo = repos.find((repo) => repo.id === selectedId);
+    setSelectedRepo(repo!); // Update the selected repo
+  };
+  
   return (
-    <div className="grid grid-cols-3 gap-5">
-      {/* Commit Messages on the Left */}
-      <CommitMessages commits={commitData?.commitMessages || []} />
-      <div>
-        {commitData && <Editor />}
-      </div>
-    </div>
+    <>
+      <select
+        id="repo-select"
+        onChange={handleSelectRepo}
+        value={selectedRepo ? selectedRepo.id : ''}
+        className="w-full px-4 py-2 bg-white border border-gray-300 rounded-xl shadow-md focus:outline-none focus:ring-2 focus:ring-blue-500 appearance-none"
+      >
+        <option value="" disabled className="text-gray-500">
+          Select a repository
+        </option>
+        {repos.map((repo) => (
+          <option
+            key={repo.id}
+            value={repo.id}
+            className="text-gray-700 hover:bg-blue-100"
+          >
+            {repo.name}
+          </option>
+        ))}
+      </select>
+      {selectedRepo && <CommitDashboard></CommitDashboard>}
+
+    </>
   );
-}
+};
+
+export default Dropdown;

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Repo } from './interface';
-import Dropdown from './components/RepoDropdown';
+import Dropdown from './components';
 import { GITHUB_CALLBACK_API_ROUTE } from '../../util/constants/apiRoutes';
 import { LocalStorageNames } from '../../util/constants/localstorage';
 

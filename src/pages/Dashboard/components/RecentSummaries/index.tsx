@@ -19,9 +19,10 @@ const RecentSummaries = () => {
         </button>
 
       </h2>
+
       {error ? (
         <p className="text-red-500">{error}</p>
-      ) : summaries.length > 0 ? (
+      ) : summaries.length ? (
         summaries.map((s, index) => (
           <div key={index} className="mb-4 p-4 border rounded">
             <h3 className="text-lg font-semibold">

@@ -2,34 +2,29 @@
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import { saveSummary } from './api'; // Adjust path as needed
+import useRepoStore from '../../../repoStore';
 
 const PublishButton = () => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const {setAddNewSummaryState} = useRepoStore();
   const handlePublishClick = async () => {
     setIsLoading(true);
     try {
       await saveSummary();
-      toast.success('Summary saved successfully!', {
-        position: 'top-right',
-        autoClose: 3000,
-      });
+      toast.success('Summary saved successfully!');
     } catch (error) {
-      toast.error('Failed to save summary.', {
-        position: 'top-right',
-        autoClose: 3000,
-      });
+      toast.error('Failed to save summary.');
     } finally {
       setIsLoading(false);
+      setAddNewSummaryState(false);
     }
   };
 
   return (
     <button
       onClick={handlePublishClick}
-      className={`px-4 py-2 rounded ml-4 text-white flex items-center ${
-        isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
-      }`}
+      className={`px-4 py-2 rounded ml-4 text-white flex items-center ${isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
+        }`}
       disabled={isLoading}
     >
       {isLoading ? (

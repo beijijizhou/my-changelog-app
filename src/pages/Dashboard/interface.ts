@@ -2,8 +2,8 @@ export interface Repo {
   id: number;
   name: string;
   html_url: string;
-  owner:{
-    login:string
+  owner: {
+    login: string
   }
 }
 
@@ -14,7 +14,7 @@ export interface DropdownProps {
 export interface Commit {
   message: string;
   date: string;
-  id:string;
+  id: string;
 }
 
 export interface CommitMessagesProps {
@@ -22,6 +22,6 @@ export interface CommitMessagesProps {
 }
 
 export interface Summary {
-  commit: Commit;
+  commits: Commit[];
   summary: string;
 }

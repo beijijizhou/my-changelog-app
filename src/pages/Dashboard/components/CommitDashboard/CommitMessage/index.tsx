@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import useRepoStore from "../../repoStore";
-import { CommitMessagesProps } from "./interfaces";
 import { groupCommitsByDate } from "./util";
 import AISummaryButton from "./AISummaryButton";
+import useRepoStore from "../../../repoStore";
+import { CommitMessagesProps } from "../../../interface";
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
   const {  setSelectedCommits } = useRepoStore();

@@ -1,8 +1,8 @@
 // AISummaryButton.jsx (or .tsx if using TypeScript)
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import useRepoStore from '../../repoStore';
 import { getCommitSummary } from './api';
+import useRepoStore from '../../../repoStore';
 
 const AISummaryButton = () => {
   const { setSelectedSummary, selectedRepo, selectedCommits } = useRepoStore();

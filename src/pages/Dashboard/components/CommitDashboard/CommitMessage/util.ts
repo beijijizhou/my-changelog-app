@@ -1,4 +1,4 @@
-import { Commit } from "./interfaces";
+import { Commit } from "../../../interface";
 
 export const groupCommitsByDate = (commits: Commit[]): Record<string, Commit[]> => {
     return commits

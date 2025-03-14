@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { groupCommitsByDate } from "./util";
-import AISummaryButton from "../Editor/AISummaryButton";
 import useRepoStore from "../../../repoStore";
 import { CommitMessagesProps } from "../../../interface";
 

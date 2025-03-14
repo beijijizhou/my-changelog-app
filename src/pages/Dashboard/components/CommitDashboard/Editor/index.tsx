@@ -1,6 +1,8 @@
 import ReactQuill from 'react-quill-new';
 import useRepoStore from '../../../repoStore';
-import PublishButton from './PublishButton';
+import SaveButton from './SaveButton';
+import CancelButton from './CancelButton';
+import AISummaryButton from './AISummaryButton';
 
 const Editor = () => {
   const { selectedSummary, setSelectedSummary } = useRepoStore();
@@ -9,9 +11,9 @@ const Editor = () => {
   };
   return (
     <div>
-      <h1 className="text-xl font-bold mb-4">
-        Commit Summary
-        <PublishButton />
+      <h1 className="text-xl font-bold mb-4 flex items-center">
+        Changelog Summary
+        <AISummaryButton/>
       </h1>
       <ReactQuill
         value={selectedSummary}
@@ -31,6 +33,12 @@ const Editor = () => {
           ],
         }}
       />
+      <div className="flex justify-end space-x-4 mt-8 mb-8">
+        <CancelButton />
+        <SaveButton />
+      </div>
+
+
     </div>
   );
 };

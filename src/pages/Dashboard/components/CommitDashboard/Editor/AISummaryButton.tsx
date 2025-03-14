@@ -1,28 +1,31 @@
-// PublishButton.jsx (or .tsx if using TypeScript)
+// AISummaryButton.jsx (or .tsx if using TypeScript)
 import { useState } from 'react';
 import { toast } from 'react-toastify';
-import { saveSummary } from './api'; // Adjust path as needed
 import useRepoStore from '../../../repoStore';
+import { getCommitSummary } from './api';
 
-const PublishButton = () => {
+const AISummaryButton = () => {
+  const { setSelectedSummary, selectedRepo, selectedCommits } = useRepoStore();
   const [isLoading, setIsLoading] = useState(false);
-  const {setAddNewSummaryState} = useRepoStore();
-  const handlePublishClick = async () => {
+
+  const handleRegenerateClick = async () => {
     setIsLoading(true);
     try {
-      await saveSummary();
-      toast.success('Summary saved successfully!');
+      toast.info('Loading AI Summary... Please wait.');
+      const data = await getCommitSummary(selectedRepo!, selectedCommits!);
+      setSelectedSummary(data.summary);
+      toast.success('AI Summary generated successfully!');
     } catch (error) {
-      toast.error('Failed to save summary.');
+      console.error('Error while regenerating the summary:', error);
+      toast.error('Failed to generate AI Summary.');
     } finally {
       setIsLoading(false);
-      setAddNewSummaryState(false);
     }
   };
 
   return (
     <button
-      onClick={handlePublishClick}
+      onClick={handleRegenerateClick}
       className={`px-4 py-2 rounded ml-4 text-white flex items-center ${isLoading ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'
         }`}
       disabled={isLoading}
@@ -49,13 +52,13 @@ const PublishButton = () => {
               d="M4 12a8 8 0 018-8v8H4z"
             />
           </svg>
-          Saving...
+          Generating...
         </>
       ) : (
-        'Publish'
+        'AI Summary'
       )}
     </button>
   );
 };
 
-export default PublishButton;
+export default AISummaryButton;

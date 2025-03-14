@@ -20,12 +20,13 @@ export default function CommitDashboard() {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-5">
+    <div className="grid grid-cols-2 gap-5 max-w-4xl mx-auto">
       {/* Commit Messages on the Left */}
       <CommitMessages commits={commitData?.commitMessages || []} />
       <div>
         {commitData && <Editor />}
       </div>
     </div>
+
   );
 }

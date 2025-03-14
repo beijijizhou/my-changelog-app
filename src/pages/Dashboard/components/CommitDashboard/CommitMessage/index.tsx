@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { groupCommitsByDate } from "./util";
-import AISummaryButton from "./AISummaryButton";
+import AISummaryButton from "../Editor/AISummaryButton";
 import useRepoStore from "../../../repoStore";
 import { CommitMessagesProps } from "../../../interface";
 
 export default function CommitMessages({ commits }: CommitMessagesProps) {
-  const {  setSelectedCommits } = useRepoStore();
+  const { setSelectedCommits } = useRepoStore();
   const messagesByDate = groupCommitsByDate(commits);
   const initialLimit = 2;
 
@@ -24,12 +24,11 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
     <div>
       <h2 className="text-xl font-bold mb-4">
         Commit Messages
-        <AISummaryButton />
+        {/* <AISummaryButton /> */}
       </h2>
       {Object.entries(messagesByDate).map(([date, commits]) => {
         const isExpanded = expandedDates[date];
         const displayedCommits = isExpanded ? commits : commits.slice(0, initialLimit);
-
         return (
           <div key={date} className="mb-4">
             <h3 className="text-lg font-semibold">{date}</h3>

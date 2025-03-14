@@ -4,7 +4,7 @@ import { fetchSummaries } from './api';
 import { Repo, Summary } from '../../interface';
 
 export const useSummaries = (selectedRepo: Repo | null) => {
-  const [summaries, setSummaries] = useState<Summary[]>([]);
+  const [summaries, setSummaries] = useState<Summary[] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -18,7 +18,7 @@ export const useSummaries = (selectedRepo: Repo | null) => {
         setSummaries(fetchedSummaries);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'Failed to load summaries.');
-        setSummaries([]);
+        setSummaries(null);
       } finally {
         setLoading(false);
       }

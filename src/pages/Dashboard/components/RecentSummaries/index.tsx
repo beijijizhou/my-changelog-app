@@ -1,5 +1,6 @@
 // src/components/RecentSummaries/RecentSummaries.tsx
 import useRepoStore from '../../repoStore';
+import Summary from './Summary';
 import { useSummaries } from './useSummaries'; // Import custom hook
 
 const RecentSummaries = () => {
@@ -29,7 +30,7 @@ const RecentSummaries = () => {
             <h3 className="text-lg font-semibold">
               {new Date(s.commits[0].date).toLocaleDateString()}
             </h3>
-            <div className="ql-editor" dangerouslySetInnerHTML={{ __html: s.summary }} />
+            <Summary summary={s.summary} />
           </div>
         ))
       ) : (

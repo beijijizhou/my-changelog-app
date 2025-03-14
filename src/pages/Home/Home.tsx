@@ -1,3 +1,4 @@
+import { LocalStorageNames } from "../../util/constants/localstorage";
 import { DASHBOARD_PAGE_ROUTES } from "../../util/constants/pageRoutes";
 const REMOTE_CLIENT_ID = "Ov23liDwZL9ZP50lMr16";
 const clientId = import.meta.env.VITE_API_LOCAL_CLIENT_ID || REMOTE_CLIENT_ID;
@@ -7,7 +8,9 @@ export default function Home() {
 
     window.location.href = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=repo`;
   };
-
+  if (localStorage.getItem(LocalStorageNames.TOKEN)) {
+    localStorage.removeItem(LocalStorageNames.TOKEN);
+  }
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-50">
       <div className="bg-white p-10 rounded-3xl shadow-2xl text-center w-full max-w-md">

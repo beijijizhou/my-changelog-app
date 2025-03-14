@@ -7,11 +7,11 @@ const RecentSummaries = () => {
   const { selectedRepo, setAddNewSummaryState } = useRepoStore();
   const { summaries, loading, error } = useSummaries(selectedRepo);
 
-  if (loading) return <div>Loading Recent Changelog</div>;
+  if (loading) return <div>Loading Recent Changelogs</div>;
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center justify-between text-gray-800">
-        Recent Changelog
+        Recent Changelogs
         <button
           onClick={() => setAddNewSummaryState(true)}
           className="px-4 py-2 rounded m-2 text-white flex items-center bg-blue-500 hover:bg-blue-600 transition-colors duration-200 shadow-md hover:shadow-lg font-semibold"
@@ -33,7 +33,7 @@ const RecentSummaries = () => {
           </div>
         ))
       ) : (
-        <p>No Changelog available for this repository.</p>
+        <p>No Changelog available for this repository</p>
       )}
     </div>
   );

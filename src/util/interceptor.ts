@@ -7,6 +7,7 @@ export const configureAxiosInterceptors = () => {
     async (config: any) => {
       if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
+        console.log(token)
       }
       config.withCredentials = true;
       return config;

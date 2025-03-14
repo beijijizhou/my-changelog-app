@@ -5,7 +5,7 @@ import CommitMessages from './CommitMessage';
 // import Editor from './Editor';
 
 export default function CommitDashboard() {
-  const { selectedRepo, } = useRepoStore(); // Get selectedRepo from Zustand store
+  const { selectedRepo, setAddNewSummaryState } = useRepoStore(); // Get selectedRepo from Zustand store
 
   const { data: commitData, isLoading, isError } = useCommits(
     selectedRepo!.owner.login,
@@ -18,15 +18,29 @@ export default function CommitDashboard() {
   if (isError) {
     return <div>Error fetching commit messages.</div>;
   }
-
   return (
     <div className="grid grid-cols-2 gap-5 max-w-4xl mx-auto">
-      {/* Commit Messages on the Left */}
-      <CommitMessages commits={commitData?.commitMessages || []} />
-      <div>
-        {commitData && <Editor />}
-      </div>
+      {commitData?.commitMessages?.length ? (
+        <>
+          <CommitMessages commits={commitData.commitMessages} />
+          <div>{commitData && <Editor />}</div>
+        </>
+      ) : (
+        <div className="col-span-2 text-center text-gray-500 font-semibold">
+          🎉 All caught up! No new changes.
+          <div className="mt-4">
+            <button
+              onClick={() => setAddNewSummaryState(false)}
+              className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition"
+            >
+              Return to Recent Changelogs
+            </button>
+          </div>
+        </div>
+
+      )}
     </div>
+
 
   );
 }

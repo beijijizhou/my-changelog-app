@@ -10,15 +10,16 @@ const RecentSummaries = () => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">Recent Summaries
+      <h2 className="text-2xl font-bold mb-6 flex items-center justify-between text-gray-800">
+        Recent Changelog
         <button
           onClick={() => setAddNewSummaryState(true)}
-          className="px-4 py-2 rounded ml-4 text-white flex items-center bg-blue-500 hover:bg-blue-600"
+          className="px-4 py-2 rounded m-2 text-white flex items-center bg-blue-500 hover:bg-blue-600 transition-colors duration-200 shadow-md hover:shadow-lg font-semibold"
         >
-          Add New Changelog
+          +
         </button>
-
       </h2>
+
 
       {error ? (
         <p className="text-red-500">{error}</p>
@@ -32,7 +33,7 @@ const RecentSummaries = () => {
           </div>
         ))
       ) : (
-        <p>No summaries available for this repository.</p>
+        <p>No Changelog available for this repository.</p>
       )}
     </div>
   );

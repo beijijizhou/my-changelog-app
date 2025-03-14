@@ -4,7 +4,8 @@ export interface Repo {
   html_url: string;
   owner: {
     login: string
-  }
+  };
+  updated_at:Date;
 }
 
 export interface DropdownProps {

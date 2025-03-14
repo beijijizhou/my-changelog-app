@@ -11,7 +11,6 @@ const RepoSelector = ({ repos }: DropdownProps) => {
     const repo = repos.find((repo) => repo.id === selectedId);
     setSelectedRepo(repo!);
   };
-  console.log(selectedRepo)
   return (
     <div className="flex flex-col items-center w-full">
       <div >

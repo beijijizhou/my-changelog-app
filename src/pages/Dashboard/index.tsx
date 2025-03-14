@@ -27,8 +27,7 @@ export default function Dashboard() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    if (localStorage.getItem(LocalStorageNames.TOKEN) && localStorage.getItem(LocalStorageNames.REPOS)) return
-    if (code && !token) {
+    if (code && !token && !repos) {
       axios
         .post(GITHUB_CALLBACK_API_ROUTE, { code })
         .then((res) => {

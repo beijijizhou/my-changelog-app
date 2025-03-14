@@ -14,7 +14,7 @@ export const fetchSummaries = async (selectedRepo: Repo | null): Promise<Summary
     const response = await axios.get(url);
     const data = response.data;
 
-    return Array.isArray(data.summaries) ? data.summaries : [];
+    return Array.isArray(data.summaries) ? data.summaries : null;
   } catch (err) {
     console.error('Error fetching summaries:', err);
     throw new Error('Failed to load summaries. Please try again.');

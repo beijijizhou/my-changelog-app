@@ -8,7 +8,7 @@ const RecentSummaries = () => {
   const { summaries, loading, error } = useSummaries(selectedRepo);
 
   if (loading) return <div>Loading Recent Changelog</div>;
-
+  console.log({summaries})
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center justify-between text-gray-800">
@@ -24,7 +24,7 @@ const RecentSummaries = () => {
 
       {error ? (
         <p className="text-red-500">{error}</p>
-      ) : summaries.length ? (
+      ) : summaries ? (
         summaries.map((s, index) => (
           <div key={index} className="mb-4 p-4 border rounded">
             <h3 className="text-lg font-semibold">

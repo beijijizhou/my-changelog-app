@@ -11,10 +11,10 @@ const Editor = () => {
   };
   return (
     <div>
-      <h1 className="text-xl font-bold mb-4 flex items-center">
-        Changelog Summary
-        <AISummaryButton/>
-      </h1>
+      <div className="flex justify-between items-center min-h-[48px] mb-4">
+        <h1 className="text-2xl font-bold">Changelog Summary</h1>
+        <AISummaryButton />
+      </div>
       <ReactQuill
         value={selectedSummary}
         onChange={handleEditorChange}

@@ -21,10 +21,9 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
 
   return (
     <div>
-      <h2 className="text-xl font-bold mb-4">
-        Commit Messages
-        {/* <AISummaryButton /> */}
-      </h2>
+      <div className="flex justify-between items-center min-h-[48px] mb-4">
+        <h1 className="text-2xl font-bold">Commit Messages</h1>
+      </div>
       {Object.entries(messagesByDate).map(([date, commits]) => {
         const isExpanded = expandedDates[date];
         const displayedCommits = isExpanded ? commits : commits.slice(0, initialLimit);

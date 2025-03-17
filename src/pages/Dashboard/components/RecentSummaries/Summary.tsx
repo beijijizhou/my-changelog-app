@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
 import useRepoStore from '../../repoStore';
-import { Commit } from '../../interface';
+import { Summary } from '../../interface';
 
-interface SummaryProps {
-  summary: string;
-  commits: Commit[];
-}
 
-const Summary: React.FC<SummaryProps> = ({ summary, commits }) => {
+
+const SummaryComponent: React.FC<Summary> = ({ summary, commits,_id}) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const { setAddNewSummaryState, setSelectedSummary, setSelectedCommits } = useRepoStore();
+  const { setAddNewSummaryState, setSelectedSummary, setSelectedCommits,setSummaryID } = useRepoStore();
   // Define a character limit for the truncated version
   const CHAR_LIMIT = 300; // Adjust this value based on your preference
-
+  
   // Function to truncate HTML safely
   const getTruncatedSummary = (html: string): string => {
     if (html.length <= CHAR_LIMIT) return html;
@@ -41,6 +38,7 @@ const Summary: React.FC<SummaryProps> = ({ summary, commits }) => {
     setAddNewSummaryState(true);
     setSelectedSummary(summary);
     setSelectedCommits(commits);
+    setSummaryID(_id!);
   }
   const handleDeleteClick = () => {
     console.log("delete");
@@ -79,4 +77,4 @@ const Summary: React.FC<SummaryProps> = ({ summary, commits }) => {
   );
 };
 
-export default Summary;
+export default SummaryComponent;

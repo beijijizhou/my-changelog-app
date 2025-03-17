@@ -24,11 +24,11 @@ const Editor = () => {
             [{ list: 'ordered' }, { list: 'bullet' }],
             ['bold', 'italic', 'underline'],
             [{ align: [] }],
-            ['link'],
+            // ['link'],
             ['blockquote'],
             [{ color: [] }, { background: [] }],
             [{ script: 'sub' }, { script: 'super' }],
-            ['image', 'code'],
+            // ['image', 'code'],
             ['clean'],
           ],
         }}

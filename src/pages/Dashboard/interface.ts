@@ -5,7 +5,7 @@ export interface Repo {
   owner: {
     login: string
   };
-  updated_at:Date;
+  updated_at: Date;
 }
 
 export interface DropdownProps {
@@ -25,4 +25,5 @@ export interface CommitMessagesProps {
 export interface Summary {
   commits: Commit[];
   summary: string;
+  _id?: string;
 }

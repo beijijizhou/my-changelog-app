@@ -4,15 +4,16 @@ import { BACKEND_ROUTE } from "../../../../../util/constants/apiRoutes";
 import useRepoStore from "../../../repoStore";
 import { Commit, Repo } from "../../../interface";
 export const saveSummary = async () => {
-    const selectedRepo = useRepoStore.getState().selectedRepo!;
-    const commits = useRepoStore.getState().selectedCommits;
-    const summary = useRepoStore.getState().selectedSummary!;
-    const owner = selectedRepo.owner.login;
-    const name = selectedRepo.name
-    const url = `${BACKEND_ROUTE}/summaries/${owner}/${name}`;
-    const repsonse = await axios.post(url, { commits, summary });
-    return repsonse.data
-}
+    const { selectedRepo, selectedCommits, selectedSummary, summaryID } = useRepoStore.getState();
+    if (!selectedRepo) throw new Error("No repository selected");
+    const url = `${BACKEND_ROUTE}/summaries/${selectedRepo.owner.login}/${selectedRepo.name}`;
+    const payload = { commits: selectedCommits, summary: selectedSummary };
+    if (summaryID) {
+        return (await axios.put(`${url}/${summaryID}`, payload)).data;
+    }
+    return (await axios.post(url, payload)).data;
+};
+
 
 export const getCommitSummary = async (selectedRepo: Repo, commitMessages: Commit[]) => {
     const owner = selectedRepo.owner.login;

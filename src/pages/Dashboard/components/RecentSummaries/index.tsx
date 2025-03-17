@@ -8,6 +8,7 @@ const RecentSummaries = () => {
   const { summaries, loading, error } = useSummaries(selectedRepo);
 
   if (loading) return <div>Loading Recent Changelogs</div>;
+  if (error) return <div>Failed to load Recent Changelogs, Please try this later</div>;
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center justify-between text-gray-800">
@@ -29,7 +30,7 @@ const RecentSummaries = () => {
             <h3 className="text-lg font-semibold">
               {new Date(s.commits[0].date).toLocaleDateString()}
             </h3>
-            <Summary summary={s.summary} />
+            <Summary summary={s.summary} commits={s.commits}/>
           </div>
         ))
       ) : (

@@ -2,15 +2,22 @@ import useRepoStore from '../../repoStore';
 import { useCommits } from '../../api'; // Import the useCommits hook
 import Editor from './Editor';
 import CommitMessages from './CommitMessage';
+import { useEffect } from 'react';
 // import Editor from './Editor';
 
 export default function CommitDashboard() {
-  const { selectedRepo, setAddNewSummaryState } = useRepoStore(); // Get selectedRepo from Zustand store
+  const { selectedRepo, setAddNewSummaryState, addNewSummaryState, selectedCommits, setSelectedCommits } = useRepoStore(); // Get selectedRepo from Zustand store
 
   const { data: commitData, isLoading, isError } = useCommits(
     selectedRepo!.owner.login,
     selectedRepo!.name
   );
+  useEffect(() => {
+    if (commitData && commitData.commitMessages) {
+      setSelectedCommits(commitData.commitMessages);
+
+    }
+  }, [commitData, setSelectedCommits])
   if (isLoading) {
     return <div>Loading commit messages...</div>;
   }
@@ -18,12 +25,13 @@ export default function CommitDashboard() {
   if (isError) {
     return <div>Error fetching commit messages.</div>;
   }
+
   return (
     <div className="grid grid-cols-2 gap-5 max-w-4xl mx-auto">
-      {commitData?.commitMessages?.length ? (
+      {selectedCommits ? (
         <>
-          <CommitMessages commits={commitData.commitMessages} />
-          <div>{commitData && <Editor />}</div>
+          <CommitMessages />
+          <Editor />
         </>
       ) : (
         <div className="col-span-2 text-center text-gray-500 font-semibold">

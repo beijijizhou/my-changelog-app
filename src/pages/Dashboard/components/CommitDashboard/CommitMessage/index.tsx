@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { groupCommitsByDate } from "./util";
 import useRepoStore from "../../../repoStore";
-import { CommitMessagesProps } from "../../../interface";
 
-export default function CommitMessages({ commits }: CommitMessagesProps) {
-  const { setSelectedCommits } = useRepoStore();
-  const messagesByDate = groupCommitsByDate(commits);
+export default function CommitMessages() {
+  const { selectedCommits } = useRepoStore();
+  console.log(selectedCommits)
+  const messagesByDate = groupCommitsByDate(selectedCommits!);
   const initialLimit = 2;
 
   const [expandedDates, setExpandedDates] = useState<Record<string, boolean>>({});
@@ -13,11 +13,7 @@ export default function CommitMessages({ commits }: CommitMessagesProps) {
   const toggleExpand = (date: string) => {
     setExpandedDates((prev) => ({ ...prev, [date]: !prev[date] }));
   };
-  useEffect(() => {
-    if (commits) {
-      setSelectedCommits(commits)
-    }
-  }, [commits, setSelectedCommits])
+  
 
   return (
     <div>

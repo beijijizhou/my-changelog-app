@@ -4,7 +4,6 @@ import useRepoStore from "../../../repoStore";
 
 export default function CommitMessages() {
   const { selectedCommits } = useRepoStore();
-  console.log(selectedCommits)
   const messagesByDate = groupCommitsByDate(selectedCommits!);
   const initialLimit = 2;
 

@@ -6,20 +6,19 @@ import useRepoStore from '../../../repoStore';
 
 const SaveButton = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { selectedSummary, setSelectedSummary } = useRepoStore();
+  const { selectedSummary, setSelectedSummary, setAddNewSummaryState, } = useRepoStore();
   const handleSaveClick = async () => {
     setIsLoading(true);
     try {
       await saveSummary();
-      setSelectedSummary("");
+     
       toast.success('Summary saved successfully!');
-      // window.location.reload();
     } catch (error) {
       toast.error('Failed to save summary.');
     } finally {
-      // setIsLoading(false);
-      // setAddNewSummaryState(false);
-      window.location.reload();
+      setSelectedSummary("");
+      setIsLoading(false);
+      setAddNewSummaryState(false);
     }
   };
   const isDisabled = isLoading || selectedSummary === "";

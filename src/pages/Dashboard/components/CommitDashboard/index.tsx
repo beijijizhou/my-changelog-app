@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 // import Editor from './Editor';
 
 export default function CommitDashboard() {
-  const { selectedRepo, setAddNewSummaryState, addNewSummaryState, selectedCommits, setSelectedCommits } = useRepoStore(); // Get selectedRepo from Zustand store
+  const { selectedRepo, setAddNewSummaryState, selectedCommits, setSelectedCommits } = useRepoStore(); // Get selectedRepo from Zustand store
 
   const { data: commitData, isLoading, isError } = useCommits(
     selectedRepo!.owner.login,
@@ -15,9 +15,8 @@ export default function CommitDashboard() {
   useEffect(() => {
     if (commitData && commitData.commitMessages) {
       setSelectedCommits(commitData.commitMessages);
-
     }
-  }, [commitData, setSelectedCommits])
+  }, [commitData, setSelectedCommits, setAddNewSummaryState])
   if (isLoading) {
     return <div>Loading commit messages...</div>;
   }

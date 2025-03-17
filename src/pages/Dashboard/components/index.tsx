@@ -4,12 +4,13 @@ import CommitDashboard from './CommitDashboard';
 import RecentSummaries from './RecentSummaries';
 
 const RepoSelector = ({ repos }: DropdownProps) => {
-  const { selectedRepo, setSelectedRepo, addNewSummaryState } = useRepoStore();
+  const { selectedRepo, setSelectedRepo, addNewSummaryState,setAddNewSummaryState } = useRepoStore();
 
   const handleSelectRepo = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedId = parseInt(event.target.value, 10);
     const repo = repos.find((repo) => repo.id === selectedId);
     setSelectedRepo(repo!);
+    setAddNewSummaryState(false);
   };
   return (
     <div className="flex flex-col items-center w-full">

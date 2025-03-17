@@ -42,28 +42,38 @@ const Summary: React.FC<SummaryProps> = ({ summary, commits }) => {
     setSelectedSummary(summary);
     setSelectedCommits(commits);
   }
+  const handleDeleteClick = () => {
+    console.log("delete");
+  }
   return (
     <div>
       <div
         className="ql-editor"
         dangerouslySetInnerHTML={{ __html: displayedSummary }}
       />
-      {summary.length > CHAR_LIMIT && (
-        <div className="flex justify-end mt-4 gap-2">
-          <button
-            onClick={() => setIsExpanded(!isExpanded)}
-            className="px-4 py-2 rounded text-white bg-blue-500 hover:bg-blue-600 transition-colors duration-200 font-semibold"
-          >
-            {isExpanded ? 'Show Less' : 'Show More'}
-          </button>
-          <button
-            onClick={handleEditClick}
-            className="px-4 py-2 rounded text-white bg-green-500 hover:bg-green-600 transition-colors duration-200 font-semibold"
-          >
-            Edit
-          </button>
-        </div>
-      )}
+
+      <div className="flex justify-end mt-4 gap-2">{
+        summary.length > CHAR_LIMIT && <button
+          onClick={() => setIsExpanded(!isExpanded)}
+          className="px-4 py-2 rounded text-white bg-blue-500 hover:bg-blue-600 transition-colors duration-200 font-semibold"
+        >
+          {isExpanded ? 'Show Less' : 'Show More'}
+        </button>
+      }
+
+        <button
+          onClick={handleEditClick}
+          className="px-4 py-2 rounded text-white bg-green-500 hover:bg-green-600 transition-colors duration-200 font-semibold"
+        >
+          Edit
+        </button>
+        <button
+          onClick={handleDeleteClick}
+          className="px-4 py-2 rounded text-white bg-red-500 hover:bg-red-600 transition-colors duration-200 font-semibold"        >
+          Delete
+        </button>
+      </div>
+
 
     </div>
   );

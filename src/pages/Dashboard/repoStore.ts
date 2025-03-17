@@ -1,5 +1,5 @@
 import { create } from "zustand";
-import { Commit, Repo, Summary } from "./interface";
+import { Commit, Repo } from "./interface";
 
 interface RepoStore {
     selectedRepo: Repo | null;
@@ -12,7 +12,7 @@ interface RepoStore {
     setSelectedCommits: (commits: Commit[]) => void;
     setAddNewSummaryState: (state: boolean) => void;
     setSummaryID: (id: string) => void;  // Setter for summaries
-
+    resetState: () => void;
 }
 
 const useRepoStore = create<RepoStore>((set) => ({
@@ -26,7 +26,14 @@ const useRepoStore = create<RepoStore>((set) => ({
     setSelectedCommits: (commits) => set({ selectedCommits: commits }),
     setAddNewSummaryState: (state) => set({ addNewSummaryState: state }), // Setter
     setSummaryID: (id) => set({ summaryID: id }), // Setter function
-
+    resetState: () => {
+        set({
+            selectedSummary: "",
+            selectedCommits: null,
+            summaryID: null,
+            addNewSummaryState: false,
+        })
+    }
 }));
 
 export default useRepoStore;

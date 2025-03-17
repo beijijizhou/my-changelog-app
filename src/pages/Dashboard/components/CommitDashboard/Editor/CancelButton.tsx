@@ -1,11 +1,11 @@
 import useRepoStore from "../../../repoStore";
 
 export default function CancelButton() {
-    const { setAddNewSummaryState, setSelectedSummary } = useRepoStore();
+    const { setAddNewSummaryState, resetState } = useRepoStore();
 
     const handleCancel = () => {
         setAddNewSummaryState(false);
-        setSelectedSummary("");
+        resetState();
     };
 
     return (

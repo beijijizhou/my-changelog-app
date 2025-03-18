@@ -13,8 +13,6 @@ export const saveSummary = async () => {
     }
     return (await axios.post(url, payload)).data;
 };
-
-
 export const getCommitSummary = async (selectedRepo: Repo, commitMessages: Commit[]) => {
     const owner = selectedRepo.owner.login;
     const name = selectedRepo.name

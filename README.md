@@ -1,3 +1,8 @@
+
+## Project Overview
+
+This website is designed to summarize changelogs from GitHub repositories. As a developer, GitHub is one of the most common tools used, and when working on large codebases, it becomes tedious and time-consuming to go through all the commit messages. This website simplifies that process and saves time by automatically summarizing commit messages into meaningful changelogs.
+
 # React + TypeScript + Vite
 
 ## Installation and Setup

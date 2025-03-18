@@ -29,6 +29,18 @@ VITE_API_LOCAL_CLIENT_ID='YOUR_GITHUB_CLIENT_ID'
 - The application follows the **Single Page Application (SPA)** architecture for a seamless user experience.
 - A clean and minimal UI allows users to toggle additional information when needed.
 - Provides immediate user feedback, such as loading states and notifications.
+- Users can edit and add changelogs as standard operations.
+- **Deleting changelogs is restricted**:
+  - Generally, changelogs should remain once published, as they serve as historical records.
+  - Editing is preferred over deletion for modifications.
+  - The only scenario where deletion is allowed is when the latest changelog needs to be merged with an upcoming one.
+  - The delete feature is fully implemented but only made visible for future use if a valid need arises.
+- **For first-time users**:
+  - Users are required to create their changelogs first.
+  - When they return for a new changelog, based on the date of the previous changelog, commits after that date will be provided automatically. This eliminates the need for users to track commit history.
+  - This creates a sense of "sunk cost," as users may prefer to stay with the app due to the importance of their historical records for changelogs.
+
+  
 
 ## Technical Decisions
 

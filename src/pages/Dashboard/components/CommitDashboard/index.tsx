@@ -24,7 +24,6 @@ export default function CommitDashboard() {
   if (isError) {
     return <div>Error fetching commit messages.</div>;
   }
-
   return (
     <div className="grid grid-cols-2 gap-5 max-w-4xl mx-auto">
       {selectedCommits ? (

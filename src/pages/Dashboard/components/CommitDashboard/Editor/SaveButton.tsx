@@ -1,35 +1,34 @@
-// PublishButton.jsx (or .tsx if using TypeScript)
-import { useState } from 'react';
-import { toast } from 'react-toastify';
-import { saveSummary } from './api'; // Adjust path as needed
-import useRepoStore from '../../../repoStore';
+import { toast } from "react-toastify";
+import { saveSummary } from "./api"; // Adjust path as needed
+import useRepoStore from "../../../repoStore";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const SaveButton = () => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { selectedSummary,resetState} = useRepoStore();
- 
-  const handleSaveClick = async () => {
-    setIsLoading(true);
-    try {
-      await saveSummary();
-     
-      toast.success('Summary saved successfully!');
-    } catch (error) {
-      toast.error('Failed to save summary.');
-    } finally {
-      setIsLoading(false);
+  const { selectedSummary, resetState } = useRepoStore();
+  const queryClient = useQueryClient();
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: saveSummary,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["commits"] });
+      toast.success("Summary saved successfully!");
       resetState();
-    }
-  };
-  const isDisabled = isLoading || selectedSummary === "";
+    },
+    onError: () => {
+      toast.error("Failed to save summary.");
+    },
+  });
+
+  const isDisabled = isPending || selectedSummary === "";
+
   return (
     <button
-      onClick={handleSaveClick}
+      onClick={() => mutate()}
       className={`px-4 py-2 rounded ml-4 text-white flex items-center 
-        ${isDisabled ? 'bg-blue-300 cursor-not-allowed' : 'bg-blue-500 hover:bg-blue-600'}`}
+        ${isDisabled ? "bg-blue-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600"}`}
       disabled={isDisabled}
     >
-      {isLoading ? (
+      {isPending ? (
         <>
           <svg
             className="animate-spin h-5 w-5 mr-2 text-white"
@@ -45,16 +44,12 @@ const SaveButton = () => {
               stroke="currentColor"
               strokeWidth="4"
             />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v8H4z"
-            />
+            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z" />
           </svg>
           Saving...
         </>
       ) : (
-        'Save'
+        "Save"
       )}
     </button>
   );

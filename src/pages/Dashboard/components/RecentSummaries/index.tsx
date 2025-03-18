@@ -8,6 +8,8 @@ const RecentSummaries = () => {
   const { data: summaries, isLoading, error } = useSummaries(selectedRepo);
   if (isLoading) return <div>Loading Recent Changelogs</div>;
   if (error) return <div>Failed to load Recent Changelogs, Please try this later</div>;
+  const reversedSummaries = summaries ? [...summaries].reverse() : [];
+
   return (
     <div>
       <h2 className="text-2xl font-bold mb-6 flex items-center justify-between text-gray-800">
@@ -23,11 +25,11 @@ const RecentSummaries = () => {
 
       {error ? (
         <p className="text-red-500">{error}</p>
-      ) : summaries ? (
-        summaries.map((s, index) => (
+      ) : reversedSummaries ? (
+        reversedSummaries.map((s, index) => (
           <div key={index} className="mb-4 p-4 border rounded">
             <h3 className="text-lg font-semibold">
-              {new Date(summaries[0].commits[0].date).toISOString().split("T")[0]}
+              {new Date(reversedSummaries[0].commits[0].date).toISOString().split("T")[0]}
             </h3>
             <SummaryComponent {...s} showDeleteButton={index === 0}/>
           </div>

@@ -29,7 +29,7 @@ const RecentSummaries = () => {
             <h3 className="text-lg font-semibold">
               {new Date(summaries[0].commits[0].date).toISOString().split("T")[0]}
             </h3>
-            <SummaryComponent {...s}/>
+            <SummaryComponent {...s} showDeleteButton={index === 0}/>
           </div>
         ))
       ) : (

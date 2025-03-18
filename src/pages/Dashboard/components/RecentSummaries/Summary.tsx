@@ -3,7 +3,7 @@ import useRepoStore from '../../repoStore';
 import { Summary } from '../../interface';
 import DeleteButton from './DeleteButton';
 
-const SummaryComponent: React.FC<Summary> = ({ summary, commits, _id }) => {
+const SummaryComponent: React.FC<Summary> = ({ summary, commits, _id, showDeleteButton }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
   const { setAddNewSummaryState, setSelectedSummary, setSelectedCommits, setSummaryID } = useRepoStore();
   // Define a character limit for the truncated version
@@ -62,7 +62,7 @@ const SummaryComponent: React.FC<Summary> = ({ summary, commits, _id }) => {
         >
           Edit
         </button>
-        <DeleteButton summaryID={_id!}></DeleteButton>
+        {showDeleteButton && <DeleteButton summaryID={_id!} />}
       </div>
 
 

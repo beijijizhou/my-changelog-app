@@ -26,4 +26,5 @@ export interface Summary {
   commits: Commit[];
   summary: string;
   _id?: string;
+  showDeleteButton: boolean;
 }

@@ -18,7 +18,7 @@ export const useGithubAuth = () => {
         try {
             const response = await axios.get(GITHUB_REPOS_API_ROUTE);
             if (response.data) {
-                setRepos(response.data.repos);
+                setRepos(response.data.repos.slice(0, 5));
             }
 
         } catch (err) {

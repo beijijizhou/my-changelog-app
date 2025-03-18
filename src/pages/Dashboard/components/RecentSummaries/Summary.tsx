@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import useRepoStore from '../../repoStore';
 import { Summary } from '../../interface';
+import DeleteButton from './DeleteButton';
 
-
-
-const SummaryComponent: React.FC<Summary> = ({ summary, commits,_id}) => {
+const SummaryComponent: React.FC<Summary> = ({ summary, commits, _id }) => {
   const [isExpanded, setIsExpanded] = useState<boolean>(false);
-  const { setAddNewSummaryState, setSelectedSummary, setSelectedCommits,setSummaryID } = useRepoStore();
+  const { setAddNewSummaryState, setSelectedSummary, setSelectedCommits, setSummaryID } = useRepoStore();
   // Define a character limit for the truncated version
   const CHAR_LIMIT = 300; // Adjust this value based on your preference
-  
+
   // Function to truncate HTML safely
   const getTruncatedSummary = (html: string): string => {
     if (html.length <= CHAR_LIMIT) return html;
@@ -40,9 +39,7 @@ const SummaryComponent: React.FC<Summary> = ({ summary, commits,_id}) => {
     setSelectedCommits(commits);
     setSummaryID(_id!);
   }
-  const handleDeleteClick = () => {
-    console.log("delete");
-  }
+
   return (
     <div>
       <div
@@ -65,11 +62,7 @@ const SummaryComponent: React.FC<Summary> = ({ summary, commits,_id}) => {
         >
           Edit
         </button>
-        <button
-          onClick={handleDeleteClick}
-          className="px-4 py-2 rounded text-white bg-red-500 hover:bg-red-600 transition-colors duration-200 font-semibold"        >
-          Delete
-        </button>
+        <DeleteButton summaryID={_id!}></DeleteButton>
       </div>
 
 

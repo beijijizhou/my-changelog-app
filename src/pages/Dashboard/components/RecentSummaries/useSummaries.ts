@@ -1,31 +1,12 @@
 // src/components/RecentSummaries/useSummaries.ts
-import { useEffect, useState } from 'react';
 import { fetchSummaries } from './api';
-import { Repo, Summary } from '../../interface';
+import { Repo} from '../../interface';
+import { useQuery } from '@tanstack/react-query';
 
 export const useSummaries = (selectedRepo: Repo | null) => {
-  const [summaries, setSummaries] = useState<Summary[] | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const loadSummaries = async () => {
-      setLoading(true);
-      setError(null);
-
-      try {
-        const fetchedSummaries = await fetchSummaries(selectedRepo);
-        setSummaries(fetchedSummaries);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'Failed to load summaries.');
-        setSummaries(null);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadSummaries();
-  }, [selectedRepo]);
-
-  return { summaries, loading, error };
+  return useQuery({
+    queryKey: ["summaries", selectedRepo?.name],
+    queryFn: () => selectedRepo ? fetchSummaries(selectedRepo) : Promise.resolve([]),
+    enabled: !!selectedRepo, // Prevent fetching if there's no repo
+  });
 };

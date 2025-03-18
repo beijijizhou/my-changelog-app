@@ -9,7 +9,7 @@ export const saveSummary = async () => {
     const url = `${BACKEND_ROUTE}/summaries/${selectedRepo.owner.login}/${selectedRepo.name}`;
     const payload = { commits: selectedCommits, summary: selectedSummary };
     if (summaryID) {
-        return (await axios.put(`${url}/${summaryID}`, payload)).data;
+        return (await axios.patch(`${url}/${summaryID}`, payload)).data;
     }
     return (await axios.post(url, payload)).data;
 };

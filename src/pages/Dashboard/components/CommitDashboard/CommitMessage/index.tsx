@@ -5,6 +5,7 @@ import useRepoStore from "../../../repoStore";
 export default function CommitMessages() {
   const { selectedCommits } = useRepoStore();
   const messagesByDate = groupCommitsByDate(selectedCommits!);
+  
   const initialLimit = 2;
 
   const [expandedDates, setExpandedDates] = useState<Record<string, boolean>>({});

@@ -6,7 +6,6 @@ import { useSummaries } from './useSummaries'; // Import custom hook
 const RecentSummaries = () => {
   const { selectedRepo, setAddNewSummaryState } = useRepoStore();
   const { data: summaries, isLoading, error } = useSummaries(selectedRepo);
-
   if (isLoading) return <div>Loading Recent Changelogs</div>;
   if (error) return <div>Failed to load Recent Changelogs, Please try this later</div>;
   return (
